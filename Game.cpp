@@ -19,7 +19,7 @@ HANDLE console;
 vector <int> Currentdata;
 vector <int> Futuredata;
 
-void Numbercatcher(string Values)                         
+void Numbercatcher(string Values)                                           //Converting string data from file to int         
 {
     stringstream tmp;
     string temp;
@@ -35,7 +35,7 @@ void Numbercatcher(string Values)
     }
 }
 
-void lifesupport(int width, int height) {
+void lifesupport(int width, int height) {                                      //Applying rules of Conway 
     int population = 0;
     for (int i = 0; i < Currentdata.size();i++) {
         population = 0;
@@ -77,7 +77,7 @@ void lifesupport(int width, int height) {
     Futuredata.clear();
 }
 
-void Draw(int width, int height) {
+void Draw(int width, int height) {                                          //Displaying image of board
     COORD pos;                                                                              
     pos.X = 0;
     pos.Y = 0;                                   
@@ -114,10 +114,10 @@ int main() {
 
     console = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    cout << "Input path to your image.(Remember to use double backslash!!): ";
+    cout << "Input path to your image.(Remember to use double backslash!!): ";      //Taking path from user
     cin >> path;
 
-    file.open(path, ios::in);
+    file.open(path, ios::in);                                                       //Colecting data from file
     if (file.good() == true)
     {
         while (!file.eof())
@@ -131,7 +131,7 @@ int main() {
         cout << "Wrong path!!";
         return 0;
     }
-    for (int i = 0;i <= Values.size() - 1;i++) {
+    for (int i = 0;i <= Values.size() - 1;i++) {                                   //Changing data type
         Numbercatcher(Values[i]);
     }
     width = Currentdata[0];
@@ -139,7 +139,9 @@ int main() {
     height = Currentdata[0];
     Currentdata.erase(Currentdata.begin());
     cout << "If you want to go to next stages automatically press a." << endl<<"To stop press X in right top corner."<< endl << "If you want to go to next stages manually press m and press it again anytime you want to go further."<< endl << "To stop press ESC.";
-    while (input != 27) {
+    
+    
+    while (input != 27) {                                                         //Main part of program count and show game of life
         if (_kbhit()) {
             input = _getch();
             if (input == 65 || input == 97) {
